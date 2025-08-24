@@ -1,0 +1,46 @@
+@media (max-width:600px) {
+
+.home-hadding1 {
+    font-size: 24px;
+    color: white;
+    padding-top: 0 1rem;
+    text-align: center;
+}
+
+.home-hadding2 {
+    color: aqua;
+    font-size: 15px;
+    padding: 0 1rem;
+}
+
+  .navbar {
+    height: 70px;
+    width: 97.66%;
+    background-color: rgb(29, 116, 92);
+    position: fixed;
+    top: 0;
+    padding: 0;
+}
+    .menu ul{
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        text-align: end;
+        background-color: rgb(6, 146, 111);
+        margin: 0;
+        gap: 0;
+        overflow: hidden;
+    }
+   .menu ul li{
+    padding: 20px;
+   }
+   .menu_icon{
+    transition: all .5s ;
+    display: block;
+   }
+
+/* /////////////////////// */
+
+}
