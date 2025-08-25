@@ -1,3 +1,44 @@
+
+<?php
+session_start();
+$conn = new mysqli('localhost','root','','inqilab_db');
+
+if($conn->connect_error){
+    die("Connection failed: ".$conn->connect_error);
+}
+
+if(isset($_POST['login'])){
+    $phone = trim($_POST['phone']);
+    $password = $_POST['password'];
+
+    if(!empty($phone) && !empty($password)){
+        $sql = "SELECT * FROM donors WHERE phone='$phone'";
+        $result = mysqli_query($conn, $sql);
+
+        if(mysqli_num_rows($result) > 0){
+            $row = mysqli_fetch_assoc($result);
+
+            // এখানে আর password_verify ব্যবহার হবে না
+            if($password === $row['password']){
+                // Login successful
+                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['user_name'] = $row['name'];
+                header("Location: donation_page.php");
+                exit;
+            } else {
+                $error = "Password ভুল ❌";
+            }
+
+        } else {
+            $error = "User পাওয়া যায় নাই ❌";
+        }
+
+    } else {
+        $error = "সব ফিল্ড পূরণ করুন ❌";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,15 +53,19 @@
 
 <section class="login-section" id="login">
     <div class="login-box">
-     <h2>Login</h2>
-     <form action="login.php" method="POST">
-      <label for="">Phone Number:</label>
-      <input type="number" name="email" placeholder=" Phone Number" required>
-      <label for="">Password:</label>
-      <input type="password" name="password" placeholder=" Enter Password" required>
-      <button type="submit" name="login">Login</button>
-      <p>Don't have an account? <a href="register.php">Register</a></p>
-    </form>
+
+     <form method="post">
+    <h2>Login</h2>
+
+    <?php if(isset($error)){ echo '<div class="message">'.$error.'</div>'; } ?>
+
+    Phone: <input type="text" name="phone" required><br>
+    Password: <input type="password" name="password" required><br>
+    <button type="submit" name="login">Login</button><br>
+    <p style="text-align:center;margin-top:10px;">
+        Don't have an account? <a href="register.php">Register</a>
+    </p>
+</form>
 
    </div>
    

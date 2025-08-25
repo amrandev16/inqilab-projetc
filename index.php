@@ -21,10 +21,11 @@
         <ul id="menulist">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#">Member</a></li>
+        <li><a href="members.php">Member</a></li>
         <li><a href="login.php">Login</a></li>
         <li><a href="register.php">Register</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="admin.php">Admin</a></li>
         </ul>
    
       </div>
@@ -72,23 +73,6 @@
     <p style="color:white">Have any questions? We’d love to hear from you.</p>
   </header>
 
-  <div class="contact-form">
-    <form action="contact_process.php" method="POST">
-      <label>Your Name</label>
-      <input type="text" name="name" required>
-
-      <label>Your Email</label>
-      <input type="email" name="email" required>
-
-      <label>Subject</label>
-      <input type="text" name="subject" required>
-
-      <label>Message</label>
-      <textarea name="message" rows="5" required></textarea>
-
-      <button type="submit" name="submit">Send Message</button>
-    </form>
-  </div>
 
    <div class="contact-info">
 
@@ -115,7 +99,7 @@
 
   function toggleMenu() {
     if(menulist.style.maxHeight == "0px"){
-      menulist.style.maxHeight = "300px";
+      menulist.style.maxHeight = "350px";
     }
     else{
       menulist.style.maxHeight = "0px";
