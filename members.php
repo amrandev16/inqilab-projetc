@@ -1,16 +1,18 @@
+
+
+
 <?php
 session_start();
-$conn = new mysqli('localhost','root','','inqilab_db');
+$conn = new mysqli('sql101.infinityfree.com','if0_39791941','inqilab123','if0_39791941_inqilab_db');
 if($conn->connect_error){ die("Connection failed: ".$conn->connect_error); }
 
-// সব donor এবং তাদের সর্বশেষ donation আনা
+// সব donor এবং তাদের সর্বশেষ donation আনা (LIMIT এর বদলে MAX ব্যবহার করা হয়েছে)
 $sql = "SELECT d.id, d.name, d.email, d.phone, d.balance, d.photo,
                dn.amount AS last_amount, dn.month AS last_month, dn.method AS last_method
         FROM donors d
         LEFT JOIN donations dn ON dn.id = (
-            SELECT id FROM donations 
-            WHERE user_id = d.id 
-            ORDER BY id DESC LIMIT 1
+            SELECT MAX(id) FROM donations 
+            WHERE user_id = d.id
         )";
 
 $result = mysqli_query($conn, $sql);
@@ -46,7 +48,7 @@ img {
 <h2 style="text-align:center;">👥 All Members & Donation History</h2>
 <table>
     <tr>
-        <th>Serial</th> <!-- ID এর পরিবর্তে Serial -->
+        <th>Serial</th>
         <th>Photo</th>
         <th>Name</th>
         <th>Email</th>
@@ -57,10 +59,10 @@ img {
         <th>Method</th>
     </tr>
     <?php 
-    $serial = 1; // serial counter শুরু
+    $serial = 1; 
     while($row = mysqli_fetch_assoc($result)){ ?>
     <tr>
-        <td><?php echo $serial++; ?></td> <!-- serial number display -->
+        <td><?php echo $serial++; ?></td>
         <td>
             <?php if(!empty($row['photo'])){ ?>
                 <img src="uploads/<?php echo $row['photo']; ?>" alt="photo">

@@ -1,7 +1,6 @@
 <?php
 session_start();
-$conn = new mysqli('localhost','root','','inqilab_db');
-
+$conn = new mysqli('sql101.infinityfree.com','if0_39791941','inqilab123','if0_39791941_inqilab_db');
 if($conn->connect_error){
     die("Connection failed: ".$conn->connect_error);
 }

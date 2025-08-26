@@ -99,7 +99,7 @@
 
   function toggleMenu() {
     if(menulist.style.maxHeight == "0px"){
-      menulist.style.maxHeight = "350px";
+      menulist.style.maxHeight = "400px";
     }
     else{
       menulist.style.maxHeight = "0px";
@@ -107,4 +107,5 @@
   }
 </script>
 </body>
-</html>
+</html> 
+
